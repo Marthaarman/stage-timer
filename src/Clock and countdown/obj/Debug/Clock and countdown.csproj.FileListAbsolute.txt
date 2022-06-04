@@ -1,0 +1,11 @@
+C:\Users\marth\source\repos\Clock and countdown\Clock and countdown\bin\Debug\Clock and countdown.exe.config
+C:\Users\marth\source\repos\Clock and countdown\Clock and countdown\bin\Debug\Clock and countdown.exe
+C:\Users\marth\source\repos\Clock and countdown\Clock and countdown\bin\Debug\Clock and countdown.pdb
+C:\Users\marth\source\repos\Clock and countdown\Clock and countdown\obj\Debug\Clock and countdown.csproj.AssemblyReference.cache
+C:\Users\marth\source\repos\Clock and countdown\Clock and countdown\obj\Debug\Clock and countdown.csproj.SuggestedBindingRedirects.cache
+C:\Users\marth\source\repos\Clock and countdown\Clock and countdown\obj\Debug\Clock_and_countdown.Form1.resources
+C:\Users\marth\source\repos\Clock and countdown\Clock and countdown\obj\Debug\Clock_and_countdown.Properties.Resources.resources
+C:\Users\marth\source\repos\Clock and countdown\Clock and countdown\obj\Debug\Clock and countdown.csproj.GenerateResource.cache
+C:\Users\marth\source\repos\Clock and countdown\Clock and countdown\obj\Debug\Clock and countdown.csproj.CoreCompileInputs.cache
+C:\Users\marth\source\repos\Clock and countdown\Clock and countdown\obj\Debug\Clock and countdown.exe
+C:\Users\marth\source\repos\Clock and countdown\Clock and countdown\obj\Debug\Clock and countdown.pdb

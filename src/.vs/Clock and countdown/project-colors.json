@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "43cb7c8a-c0c1-4188-93c1-b1e26d3bb07f": {
+      "ProjectGuid": "43cb7c8a-c0c1-4188-93c1-b1e26d3bb07f",
+      "DisplayName": "Clock and countdown",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
