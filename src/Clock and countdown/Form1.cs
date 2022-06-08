@@ -276,7 +276,7 @@ namespace Clock_and_countdown
             this.fontSize = (int)this.numericUpDown_fontSize.Value;
             FontFamily fam = this.label_preview.Font.FontFamily;
             label_preview.Font = new Font(fam, this.fontSize);
-            this.fontSize = (int) Math.Ceiling(this.factor_previewProgram * 1.5 * this.fontSize);
+            this.fontSize = (int) Math.Ceiling(this.factor_previewProgram * 1.2 * this.fontSize);
             if(this.form_output != null)
             {
                 if (this.form_output.Visible)
