@@ -310,13 +310,16 @@ namespace Clock_and_countdown
             this.action_takeFontSize();
             String outputText = "";
 
-            outputText += program_hours.ToString("00");
-            outputText += ":";
-            outputText += program_minutes.ToString("00");
-            if (showSeconds)
+            if (this.mode_output != mode.idle)
             {
+                outputText += program_hours.ToString("00");
                 outputText += ":";
-                outputText += program_seconds.ToString("00");
+                outputText += program_minutes.ToString("00");
+                if (showSeconds)
+                {
+                    outputText += ":";
+                    outputText += program_seconds.ToString("00");
+                }
             }
 
             this.label_preview.Text = outputText;
@@ -524,6 +527,7 @@ namespace Clock_and_countdown
                 default:
                 case mode.idle:
                     this.label_preview.Text = "";
+                    this.action_timeToOutput(this.seconds_clock);
                     this.action_centreTextSettingsForm();
                     break;
                 case mode.clock:
