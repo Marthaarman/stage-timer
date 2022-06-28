@@ -128,12 +128,12 @@
             this.label_version.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label_version.AutoSize = true;
-            this.label_version.Location = new System.Drawing.Point(343, 35);
+            this.label_version.Location = new System.Drawing.Point(386, 35);
             this.label_version.Margin = new System.Windows.Forms.Padding(0, 5, 3, 0);
             this.label_version.Name = "label_version";
-            this.label_version.Size = new System.Drawing.Size(126, 26);
+            this.label_version.Size = new System.Drawing.Size(83, 26);
             this.label_version.TabIndex = 1;
-            this.label_version.Text = "version placeholder";
+            this.label_version.Text = "Version 1.0.2";
             this.label_version.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label_author
@@ -166,6 +166,8 @@
             // 
             // button_countdownSetTime
             // 
+            this.button_countdownSetTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button_countdownSetTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.button_countdownSetTime.Location = new System.Drawing.Point(0, 33);
             this.button_countdownSetTime.Name = "button_countdownSetTime";
@@ -177,6 +179,8 @@
             // 
             // button_pauseCountdown
             // 
+            this.button_pauseCountdown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button_pauseCountdown.BackColor = System.Drawing.Color.Silver;
             this.button_pauseCountdown.Enabled = false;
             this.button_pauseCountdown.Location = new System.Drawing.Point(0, 156);
@@ -189,6 +193,8 @@
             // 
             // button_startCountDown
             // 
+            this.button_startCountDown.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button_startCountDown.BackColor = System.Drawing.Color.Silver;
             this.button_startCountDown.Enabled = false;
             this.button_startCountDown.Location = new System.Drawing.Point(0, 77);

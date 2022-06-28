@@ -46,10 +46,6 @@ namespace Clock_and_countdown
         {
             InitializeComponent();
 
-            //  Set the version from settings to the box in the right bottom corner
-            //  set into label_version
-            this.label_version.Text = Application.ProductVersion;
-
             //  center texts
             this.action_centreTextSettingsForm();
 
@@ -395,18 +391,22 @@ namespace Clock_and_countdown
 
                 //  give color to the program label in the output
                 this.form_output.Controls["label_program"].ForeColor = Color.White;
-
-                //  show the output form
-                if(!this.form_output.Visible)
-                {
-                    this.form_output.Show();
-                }
-
+                
                 //  centre the text in the output form
                 this.action_centreTextOutputForm();
 
                 //  add resize actions
                 form_output.Resize += this.listener_outputFormResize;
+
+                //  show the output form
+                if (!this.form_output.Visible)
+                {
+                    this.form_output.Show();
+                }
+
+                //  repeat bounds setting
+                //  only seems to work after the .show()
+                this.form_output.Bounds = this.screen_selectedOutputScreen.Bounds;
 
                 //  change open button text to close text
                 this.button_openOutputView.Text = "Close Output View";
