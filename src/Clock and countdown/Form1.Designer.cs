@@ -133,7 +133,7 @@
             this.label_version.Name = "label_version";
             this.label_version.Size = new System.Drawing.Size(83, 26);
             this.label_version.TabIndex = 1;
-            this.label_version.Text = "Version 1.0.2";
+            this.label_version.Text = "Version 1.0.3";
             this.label_version.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label_author
@@ -175,7 +175,7 @@
             this.button_countdownSetTime.TabIndex = 4;
             this.button_countdownSetTime.Text = "Set Countdown Time";
             this.button_countdownSetTime.UseVisualStyleBackColor = false;
-            this.button_countdownSetTime.Click += new System.EventHandler(this.button_countdownSetTime_Click);
+            this.button_countdownSetTime.Click += new System.EventHandler(this.ButtonCountdownSetTimeClick);
             // 
             // button_pauseCountdown
             // 
@@ -189,7 +189,7 @@
             this.button_pauseCountdown.TabIndex = 2;
             this.button_pauseCountdown.Text = "PAUSE";
             this.button_pauseCountdown.UseVisualStyleBackColor = false;
-            this.button_pauseCountdown.Click += new System.EventHandler(this.buttonPauseCountdown_Click);
+            this.button_pauseCountdown.Click += new System.EventHandler(this.ButtonPauseCountdownClick);
             // 
             // button_startCountDown
             // 
@@ -203,7 +203,7 @@
             this.button_startCountDown.TabIndex = 1;
             this.button_startCountDown.Text = "START";
             this.button_startCountDown.UseVisualStyleBackColor = false;
-            this.button_startCountDown.Click += new System.EventHandler(this.button_startCountDown_Click);
+            this.button_startCountDown.Click += new System.EventHandler(this.ButtonStartCountDownClick);
             // 
             // tableLayoutPanel3
             // 
@@ -293,7 +293,7 @@
             this.button_openOutputView.TabIndex = 1;
             this.button_openOutputView.Text = "Open Program View";
             this.button_openOutputView.UseVisualStyleBackColor = true;
-            this.button_openOutputView.Click += new System.EventHandler(this.button_openOutputView_Click);
+            this.button_openOutputView.Click += new System.EventHandler(this.ButtonOpenOutputViewClick);
             // 
             // comboBox_outputMonitor
             // 
@@ -318,7 +318,7 @@
             this.groupBox4.Size = new System.Drawing.Size(230, 111);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Output mode";
+            this.groupBox4.Text = "Output Mode";
             // 
             // radioButton_mode_idle_black
             // 

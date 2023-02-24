@@ -1,89 +1,76 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace Clock_and_countdown
 {
     public partial class Form1 : Form
     {
-        private Form form_output;
-        Screen[] screens = Screen.AllScreens;
-        private Screen screen_selectedOutputScreen;
+        private readonly Screen[] _screens = Screen.AllScreens;
+        private int _backgroundWorkCounter;
 
-        private int fontSize = 35;
+        private BackgroundWorker _backgroundWorker1;
 
-        private mode mode_output = mode.clock;
+        private int _countdownHours, _countdownMinutes, _countdownSeconds;
+        private bool _countdownOvertime;
 
-        private bool seconds_clock = false, seconds_countdown = true;
+        private bool _countdownStarted;
 
-        private int countdown_hours = 0, countdown_minutes = 0, countdown_seconds = 0;
-        private int program_hours, program_minutes, program_seconds;
-        private int backgroundWorkCounter = 0;
+        private float _factorPreviewProgram = 1;
 
-        private bool countdown_started = false;
-        private bool countdown_overtime = false;
+        private int _fontSize = 35;
+        private Form _formOutput;
 
-        private float factor_previewProgram = 1;
+        private Mode _modeOutput = Mode.Clock;
+        private int _programHours, _programMinutes, _programSeconds;
+        private Screen _screenSelectedOutputScreen;
 
-        private enum mode
-        {
-            clock,
-            countdown,
-            black,
-            idle
-        }
-
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private bool _secondsClock, _secondsCountdown = true;
 
         public Form1()
         {
             InitializeComponent();
 
             //  center texts
-            this.action_centreTextSettingsForm();
+            ActionCentreTextSettingsForm();
 
-            
-            //  detect screens
-            this.action_detectScreens();
+
+            //  detect _screens
+            ActionDetectScreens();
 
             //  add resize actions
-            this.Resize += this.listener_settingsFormResize;
+            Resize += ListenerSettingsFormResize;
 
             //  close output screen on escape button
-            this.KeyUp += listener_detectEscape;
+            KeyUp += ListenerDetectEscape;
 
             //  action to font size change event
-            this.numericUpDown_fontSize.ValueChanged += listener_changeFontSize;
+            numericUpDown_fontSize.ValueChanged += ListenerChangeFontSize;
 
-            
-            //  detect change mode
-            this.radioButton_mode_clock.CheckedChanged += listener_changeMode;
-            this.radioButton_mode_countdown.CheckedChanged += listener_changeMode;
-            this.radioButton_mode_idle_black.CheckedChanged += listener_changeMode;
+
+            //  detect change Mode
+            radioButton_mode_clock.CheckedChanged += ListenerChangeMode;
+            radioButton_mode_countdown.CheckedChanged += ListenerChangeMode;
+            radioButton_mode_idle_black.CheckedChanged += ListenerChangeMode;
 
             //  detect seconds view change
-            this.checkBox_clock_seconds.CheckedChanged += listener_changeSecondsClock;
-            this.checkBox_countdown_seconds.CheckedChanged += listener_changeSecondsCountdown;
+            checkBox_clock_seconds.CheckedChanged += ListenerChangeSecondsClock;
+            checkBox_countdown_seconds.CheckedChanged += ListenerChangeSecondsCountdown;
 
 
             //  detect change of countdown
-            this.numericUpDown_hours.ValueChanged += listener_changeDuration;
-            this.numericUpDown_minutes.ValueChanged += listener_changeDuration;
-            this.numericUpDown_seconds.ValueChanged += listener_changeDuration;
-            this.dateTimePicker_countdownTime.ValueChanged += listener_changeDuration;
+            numericUpDown_hours.ValueChanged += ListenerChangeDuration;
+            numericUpDown_minutes.ValueChanged += ListenerChangeDuration;
+            numericUpDown_seconds.ValueChanged += ListenerChangeDuration;
+            dateTimePicker_countdownTime.ValueChanged += ListenerChangeDuration;
 
             //  set countdown timer format
-            this.dateTimePicker_countdownTime.Format = DateTimePickerFormat.Time;
-            this.dateTimePicker_countdownTime.ShowUpDown = true;
+            dateTimePicker_countdownTime.Format = DateTimePickerFormat.Time;
+            dateTimePicker_countdownTime.ShowUpDown = true;
 
-            this.radioButton_countdownTime.CheckedChanged += listener_changeCountdownMode;
+            radioButton_countdownTime.CheckedChanged += ListenerChangeCountdownMode;
 
             //  backgroundworker 
             //  foor loop every second
@@ -94,137 +81,208 @@ namespace Clock_and_countdown
         //  input changes & listeners
         /*-----------------------------------------------------------------------*/
 
-        private void listener_changeSecondsClock(object sender, EventArgs e)
+        /// <summary>
+        /// This function should be called when the checkbox of showing seconds on the normal clock changes value
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListenerChangeSecondsClock(object sender, EventArgs e)
         {
-            this.seconds_clock = this.checkBox_clock_seconds.Checked;
+            _secondsClock = checkBox_clock_seconds.Checked;
         }
 
-        private void listener_changeSecondsCountdown(object sender, EventArgs e)
+        /// <summary>
+        /// This function should be called when the checkbox of showing seconds on the countdown timer changes value
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListenerChangeSecondsCountdown(object sender, EventArgs e)
         {
-            this.seconds_countdown = this.checkBox_countdown_seconds.Checked;
-            this.action_setCountdownTimers();
+            _secondsCountdown = checkBox_countdown_seconds.Checked;
+            ActionSetCountdownTimers();
         }
 
-        private void listener_changeDuration(object sender, EventArgs e)
+        /// <summary>
+        /// Once the countdown duration has been changed for either hours, minutes or seconds this function must be called
+        /// The new timers will be prepared
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListenerChangeDuration(object sender, EventArgs e)
         {
-            this.action_setCountdownTimers();
+            ActionSetCountdownTimers();
         }
 
-        private void listener_changeMode(object sender, EventArgs e)
+        /// <summary>
+        /// When the mode changes between clock or countdown, this function must be called.
+        /// The output will be prepared
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListenerChangeMode(object sender, EventArgs e)
         {
-            if (this.radioButton_mode_idle_black.Checked)
+            if (radioButton_mode_idle_black.Checked)
             {
-                this.mode_output = mode.idle;
-                this.action_pauseCountdown();
+                _modeOutput = Mode.Idle;
+                ActionPauseCountdown();
             }
-            else if (this.radioButton_mode_countdown.Checked)
+            else if (radioButton_mode_countdown.Checked)
             {
-                this.mode_output = mode.countdown;
-                this.action_setCountdownMode();
+                _modeOutput = Mode.Countdown;
+                ActionSetCountdownMode();
             }
             else
             {
-                this.action_pauseCountdown();
-                this.mode_output = mode.clock;
-                this.action_setCountdownTimers();
+                ActionPauseCountdown();
+                _modeOutput = Mode.Clock;
+                ActionSetCountdownTimers();
             }
         }
 
-        private void listener_changeCountdownMode(object sender, EventArgs e)
+        /// <summary>
+        /// When a switch is made from countdown until a certain time or for a duration, this function must be called to prepare the output
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListenerChangeCountdownMode(object sender, EventArgs e)
         {
-            if (this.mode_output == mode.countdown)
+            if (_modeOutput == Mode.Countdown) ActionSetCountdownMode();
+        }
+
+        /// <summary>
+        /// When the form with controls is resized, this function must be called to change output preview accordingly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListenerSettingsFormResize(object sender, EventArgs e)
+        {
+            ActionCentreTextSettingsForm();
+        }
+
+        /// <summary>
+        /// When the escape button is pressed, this function should be called to clode the output view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListenerDetectEscape(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Escape)
             {
-                this.action_setCountdownMode();
+                return;
             }
-           
+            
+            e.Handled = true;
+            ActionCloseOutputForm();
+            
         }
 
-        private void listener_settingsFormResize(object sender, EventArgs e)
+        /// <summary>
+        /// When the font size is changed in the controls, this function must be called to change font sizes in the output and preview
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListenerChangeFontSize(object sender, EventArgs e)
         {
-            this.action_centreTextSettingsForm();
+            ActionTakeFontSize();
+            ActionCentreTextSettingsForm();
         }
 
-        private void listener_detectEscape(object sender, KeyEventArgs e)
+        /// <summary>
+        /// When the output window is resized, this function is called to handle font formats
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListenerOutputFormResize(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Escape)
-            {
-                e.Handled = true;
-                this.action_closeOutputForm();
-            }
-        }
-
-        private void listener_changeFontSize(object sender, EventArgs e)
-        {
-            this.action_takeFontSize();
-            this.action_centreTextSettingsForm();
-        }
-
-        private void listener_outputFormResize(object sender, EventArgs e)
-        {
-            this.action_centreTextOutputForm();
+            ActionCentreTextOutputForm();
         }
 
         /*-----------------------------------------------------------------------*/
         //  Screen settings
         /*-----------------------------------------------------------------------*/
 
-        private void action_detectScreens()
+        /// <summary>
+        /// This function is called upon initializing to detect which screens are connected to the machine.
+        /// It will select the lastly found screen as output monitor
+        /// </summary>
+        private void ActionDetectScreens()
         {
-            this.screen_selectedOutputScreen = this.screens[this.screens.Length - 1];
-            foreach (Screen screen in this.screens)
-            {
-                this.comboBox_outputMonitor.Items.Add(screen.DeviceName.ToString());
-            }
-            this.comboBox_outputMonitor.SelectedIndex = this.screens.Length - 1;
-            this.comboBox_outputMonitor.SelectedIndexChanged += this.listener_selectedScreenChanged;
+            _screenSelectedOutputScreen = _screens[_screens.Length - 1];
+            foreach (Screen screen in _screens) comboBox_outputMonitor.Items.Add(screen.DeviceName);
+            comboBox_outputMonitor.SelectedIndex = _screens.Length - 1;
+            comboBox_outputMonitor.SelectedIndexChanged += ListenerSelectedScreenChanged;
         }
 
-        private void listener_selectedScreenChanged(object sender, EventArgs e)
+        /// <summary>
+        /// When the selected screen is changed in controls, this function will prepare the output for that selected screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListenerSelectedScreenChanged(object sender, EventArgs e)
         {
-            foreach (Screen screen in this.screens)
-            {
-                if (screen.DeviceName.ToString() == this.comboBox_outputMonitor.SelectedItem.ToString())
+            foreach (Screen screen in _screens)
+                if (screen.DeviceName == comboBox_outputMonitor.SelectedItem.ToString())
                 {
-                    this.screen_selectedOutputScreen = screen;
+                    _screenSelectedOutputScreen = screen;
                     return;
                 }
-            }
 
-            this.screen_selectedOutputScreen = this.screens[this.screens.Length - 1];
+            _screenSelectedOutputScreen = _screens[_screens.Length - 1];
         }
-    
+
         /*-----------------------------------------------------------------------*/
         //  Backgroundworker
         /*-----------------------------------------------------------------------*/
+
+        /// <summary>
+        /// The backgroundworker will be present to tick every second in the background
+        /// </summary>
         private void InitializeBackgroundWorker()
         {
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorker1.WorkerReportsProgress = true;
-            this.backgroundWorker1.WorkerSupportsCancellation = true;
-            this.backgroundWorker1.DoWork += new DoWorkEventHandler(backgroundWorker1_DoWork);
-            this.backgroundWorker1.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker1_RunWorkerCompleted);
-            this.backgroundWorker1.ProgressChanged += new ProgressChangedEventHandler(backgroundWorker1_ProgressChanged);
-            this.backgroundWorker1.RunWorkerAsync();
+            _backgroundWorker1 = new BackgroundWorker
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+            _backgroundWorker1.DoWork += BackgroundWorker1DoWork;
+            _backgroundWorker1.RunWorkerCompleted += BackgroundWorker1RunWorkerCompleted;
+            _backgroundWorker1.ProgressChanged += BackgroundWorker1ProgressChanged;
+            _backgroundWorker1.RunWorkerAsync();
         }
 
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        /// <summary>
+        /// The function that does the work. By reporting the progress a function in the foreground will be triggered
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BackgroundWorker1DoWork(object sender, DoWorkEventArgs e)
         {
             while (true)
             {
-                backgroundWorker1.ReportProgress(0, backgroundWorkCounter.ToString());
-                System.Threading.Thread.Sleep(1000);
-                backgroundWorkCounter++;
+                _backgroundWorker1.ReportProgress(0, _backgroundWorkCounter.ToString());
+                Thread.Sleep(1000);
+                _backgroundWorkCounter++;
             }
         }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        /// <summary>
+        /// The worker will never actually complete but closes with the program
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private static void BackgroundWorker1RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //  do nothing
         }
 
-        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        /// <summary>
+        /// This is the callback in the foreground that is triggered by the backgroundworker every second
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BackgroundWorker1ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            this.loop_programLoop();
+            LoopProgramLoop();
         }
 
 
@@ -232,384 +290,429 @@ namespace Clock_and_countdown
         //  Form Style
         /*-----------------------------------------------------------------------*/
 
-        private void action_centreTextSettingsForm()
+        /// <summary>
+        /// Function that centers the text in the settings form (preview)
+        /// </summary>
+        private void ActionCentreTextSettingsForm()
         {
-            var boxWidthCenter = this.groupBox_preview.Width / 2;
-            var boxHeightCenter = this.groupBox_preview.Height / 2;
+            int boxWidthCenter = groupBox_preview.Width / 2;
+            int boxHeightCenter = groupBox_preview.Height / 2;
 
-            var txtWidthCenter = this.label_preview.Width / 2;
-            var txtHeightCenter = this.label_preview.Height / 2;
+            int txtWidthCenter = label_preview.Width / 2;
+            int txtHeightCenter = label_preview.Height / 2;
 
-            var top = boxHeightCenter - txtHeightCenter;
-            var left = boxWidthCenter - txtWidthCenter;
+            int top = boxHeightCenter - txtHeightCenter;
+            int left = boxWidthCenter - txtWidthCenter;
 
-            this.label_preview.Location = new Point(left, top);
+            label_preview.Location = new Point(left, top);
         }
 
-        private void action_centreTextOutputForm()
+        /// <summary>
+        /// Function that centers the text in the output form (program)
+        /// </summary>
+        private void ActionCentreTextOutputForm()
         {
-            if(this.form_output != null)
+            if (_formOutput == null)
             {
-                if(this.form_output.Visible)
-                {
-                    var boxWidthCenter = this.form_output.Width / 2;
-                    var boxHeightCenter = this.form_output.Height / 2;
+                return;
+            }
 
-                    var txtWidthCenter = this.form_output.Controls["label_program"].Width / 2;
-                    var txtHeightCenter = this.form_output.Controls["label_program"].Height / 2;
+            if (!_formOutput.Visible)
+            {
+                return;
+            }
+            int boxWidthCenter = _formOutput.Width / 2;
+            int boxHeightCenter = _formOutput.Height / 2;
 
-                    var top = boxHeightCenter - txtHeightCenter;
-                    var left = boxWidthCenter - txtWidthCenter;
+            int txtWidthCenter = _formOutput.Controls["label_program"].Width / 2;
+            int txtHeightCenter = _formOutput.Controls["label_program"].Height / 2;
 
-                    this.form_output.Controls["label_program"].Location = new Point(left, top);
-                }
+            int top = boxHeightCenter - txtHeightCenter;
+            int left = boxWidthCenter - txtWidthCenter;
+
+            _formOutput.Controls["label_program"].Location = new Point(left, top);
+        }
+
+        /// <summary>
+        /// Action that takes the font size from the input and sets it into the output form
+        /// </summary>
+        private void ActionTakeFontSize()
+        {
+            _fontSize = (int)numericUpDown_fontSize.Value;
+            FontFamily fam = label_preview.Font.FontFamily;
+            label_preview.Font = new Font(fam, _fontSize);
+            _fontSize = (int)Math.Ceiling(_factorPreviewProgram * 1.2 * _fontSize);
+            if (_formOutput == null) return;
+            if (_formOutput.Visible)
+                _formOutput.Controls["label_program"].Font = new Font(fam, _fontSize);
+        }
+
+        /// <summary>
+        /// Function that will close the output form
+        /// </summary>
+        private void ActionCloseOutputForm()
+        {
+            _formOutput?.Hide();
+            button_openOutputView.Text = "Open Program View";
+        }
+
+        /// <summary>
+        /// Sets the color of the output form. Mainly for countdown flickering
+        /// </summary>
+        /// <param name="color">The color to which the output form text should be set</param>
+        private void ActionSetOutputColor(Color color)
+        {
+            label_preview.ForeColor = color;
+            if (_formOutput == null)
+            {
+                return;
+            }
+
+            if (_formOutput.Visible)
+            {
+                _formOutput.Controls["label_program"].ForeColor = color;
             }
         }
 
-        private void action_takeFontSize()
+        /// <summary>
+        /// Sets the configured time to the output view
+        /// _programHours must be set for the hours
+        /// _programMinutes must be set for the minutes
+        /// _programSeconds could be set for the seconds
+        /// Centers the text
+        /// </summary>
+        /// <param name="showSeconds">Enables or disables the seconds in the output form</param>
+        private void ActionTimeToOutput(bool showSeconds)
         {
+            ActionTakeFontSize();
+            string outputText = "";
 
-            this.fontSize = (int)this.numericUpDown_fontSize.Value;
-            FontFamily fam = this.label_preview.Font.FontFamily;
-            label_preview.Font = new Font(fam, this.fontSize);
-            this.fontSize = (int) Math.Ceiling(this.factor_previewProgram * 1.2 * this.fontSize);
-            if(this.form_output != null)
+            if (_modeOutput != Mode.Idle)
             {
-                if (this.form_output.Visible)
-                {
-                    this.form_output.Controls["label_program"].Font = new Font(fam, fontSize);
-                }
-            }
-        }
-
-        private void action_closeOutputForm()
-        {
-            this.form_output?.Hide();
-            this.button_openOutputView.Text = "Open Program View";
-        }
-
-        private void action_setOutputColor(Color color)
-        {
-            this.label_preview.ForeColor = color;
-            if (this.form_output != null)
-            {
-                if (this.form_output.Visible)
-                {
-                    this.form_output.Controls["label_program"].ForeColor = color;
-                }
-            }
-
-        }
-
-        private void action_timeToOutput(bool showSeconds)
-        {
-            this.action_takeFontSize();
-            String outputText = "";
-
-            if (this.mode_output != mode.idle)
-            {
-                outputText += program_hours.ToString("00");
+                outputText += _programHours.ToString("00");
                 outputText += ":";
-                outputText += program_minutes.ToString("00");
+                outputText += _programMinutes.ToString("00");
                 if (showSeconds)
                 {
                     outputText += ":";
-                    outputText += program_seconds.ToString("00");
+                    outputText += _programSeconds.ToString("00");
                 }
             }
 
-            this.label_preview.Text = outputText;
-            if (this.form_output != null)
-            {
-                if (this.form_output.Visible)
-                {
-                    this.form_output.Controls["label_program"].Text = outputText;
-                }
-            }
-            this.action_centreTextSettingsForm();
-            this.action_centreTextOutputForm();
+            label_preview.Text = outputText;
+            if (_formOutput != null)
+                if (_formOutput.Visible)
+                    _formOutput.Controls["label_program"].Text = outputText;
+            ActionCentreTextSettingsForm();
+            ActionCentreTextOutputForm();
         }
 
         /*-----------------------------------------------------------------------*/
         //  Button actions
         /*-----------------------------------------------------------------------*/
 
-        private void button_startCountDown_Click(object sender, EventArgs e)
+        /// <summary>
+        /// When the start button is pressed, this function calls the start countdown function.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonStartCountDownClick(object sender, EventArgs e)
         {
-            this.action_startCountdown();
+            ActionStartCountdown();
         }
 
-        private void button_countdownSetTime_Click(object sender, EventArgs e)
+        /// <summary>
+        /// When the set time button is pressed, this function will set the countdown time to program
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonCountdownSetTimeClick(object sender, EventArgs e)
         {
-            if(this.mode_output == mode.countdown)
+            if (_modeOutput != Mode.Countdown)
             {
-                if(this.radioButton_countdownTime.Checked)
-                {
-                    this.action_setCountdownTimers();
-                }
-                this.action_takeCountdownTime();
-                if (this.radioButton_countdownTime.Checked)
-                {
-                    this.countdown_started = true;
-                    
-                }
-            }
-        }
-
-        private void button_openOutputView_Click(object sender, EventArgs e)
-        {
-
-            //  create new instance if not yet existing
-            if (this.form_output == null)
-            {
-                this.form_output = new Form();
+                return;
             }
             
-            if (this.form_output.Visible)
+            if (radioButton_countdownTime.Checked) ActionSetCountdownTimers();
+            ActionTakeCountdownTime();
+            if (radioButton_countdownTime.Checked) _countdownStarted = true;
+        }
+
+        /// <summary>
+        /// When the open output view button is pressed, this function will open the output window
+        /// Sets all styles, fonts and colors correctly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonOpenOutputViewClick(object sender, EventArgs e)
+        {
+            //  create new instance if not yet existing
+            if (_formOutput == null) _formOutput = new Form();
+
+            if (_formOutput.Visible)
             {
-                action_closeOutputForm();
+                ActionCloseOutputForm();
             }
             else
             {
                 //  set output form style
-                this.form_output.FormBorderStyle = FormBorderStyle.None;
-                this.form_output.Bounds = this.screen_selectedOutputScreen.Bounds;
-                this.form_output.KeyUp += this.listener_detectEscape;
-                this.form_output.BackColor = Color.Black;
+                _formOutput.FormBorderStyle = FormBorderStyle.None;
+                _formOutput.Bounds = _screenSelectedOutputScreen.Bounds;
+                _formOutput.KeyUp += ListenerDetectEscape;
+                _formOutput.BackColor = Color.Black;
 
-                this.factor_previewProgram = form_output.Bounds.Width / this.groupBox_preview.Width;
+                _factorPreviewProgram = _formOutput.Bounds.Width / groupBox_preview.Width;
 
                 //  add a label for the text to the program output if not yet present
-                if (this.form_output.Controls.Count == 0)
+                if (_formOutput.Controls.Count == 0)
                 {
-                    Label label_program = new Label();
-                    label_program.Text = "label_program placeholder";
-                    label_program.Name = "label_program";
-                    label_program.AutoSize = true;
-                    this.form_output.Controls.Add(label_program);
+                    Label labelProgram = new Label
+                    {
+                        Text = "label_program placeholder",
+                        Name = "label_program",
+                        AutoSize = true
+                    };
+                    _formOutput.Controls.Add(labelProgram);
                 }
 
                 //  give color to the program label in the output
-                this.form_output.Controls["label_program"].ForeColor = Color.White;
-                
+                _formOutput.Controls["label_program"].ForeColor = Color.White;
+
                 //  centre the text in the output form
-                this.action_centreTextOutputForm();
+                ActionCentreTextOutputForm();
 
                 //  add resize actions
-                form_output.Resize += this.listener_outputFormResize;
+                _formOutput.Resize += ListenerOutputFormResize;
 
                 //  show the output form
-                if (!this.form_output.Visible)
-                {
-                    this.form_output.Show();
-                }
+                if (!_formOutput.Visible) _formOutput.Show();
 
                 //  repeat bounds setting
                 //  only seems to work after the .show()
-                this.form_output.Bounds = this.screen_selectedOutputScreen.Bounds;
+                _formOutput.Bounds = _screenSelectedOutputScreen.Bounds;
 
                 //  change open button text to close text
-                this.button_openOutputView.Text = "Close Output View";
+                button_openOutputView.Text = "Close Output View";
             }
         }
 
-        private void buttonPauseCountdown_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Pause the countdown when the button is pressed. This is the handler for that
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonPauseCountdownClick(object sender, EventArgs e)
         {
-            this.action_pauseCountdown();
+            ActionPauseCountdown();
         }
 
-        private void action_takeCountdownTime()
+        /// <summary>
+        /// Stop the current countdown and enter the taken countdown time
+        /// Countdown time must be taken (prepared) from the input first using ActionSetCountdownTimers
+        /// </summary>
+        private void ActionTakeCountdownTime()
         {
-            this.program_hours = this.countdown_hours;
-            this.program_minutes = this.countdown_minutes;
-            this.program_seconds = this.countdown_seconds;
-            this.countdown_overtime = false;
-            this.action_pauseCountdown();
-            this.action_timeToOutput(this.seconds_countdown);
+            _programHours = _countdownHours;
+            _programMinutes = _countdownMinutes;
+            _programSeconds = _countdownSeconds;
+            _countdownOvertime = false;
+            ActionPauseCountdown();
+            ActionTimeToOutput(_secondsCountdown);
         }
 
-        private void action_pauseCountdown()
+        /// <summary>
+        /// Pause the countdown
+        /// </summary>
+        private void ActionPauseCountdown()
         {
-            this.countdown_started = false;
-            if (this.mode_output == mode.countdown && !this.radioButton_countdownTime.Checked)
+            _countdownStarted = false;
+            if (_modeOutput != Mode.Countdown && !radioButton_countdownTime.Checked)
             {
-                this.button_pauseCountdown.Enabled = false;
-                this.button_startCountDown.Enabled = true;
-                this.button_startCountDown.BackColor = Color.FromArgb(255, 0, 192, 0);
-                this.button_pauseCountdown.BackColor = Color.Silver;
+                return;
             }
 
+            button_pauseCountdown.Enabled = false;
+            button_startCountDown.Enabled = true;
+            button_startCountDown.BackColor = Color.FromArgb(255, 0, 192, 0);
+            button_pauseCountdown.BackColor = Color.Silver;
         }
 
-        private void action_startCountdown()
+        /// <summary>
+        /// Start / resume the countdown
+        /// </summary>
+        private void ActionStartCountdown()
         {
-            if (this.mode_output == mode.countdown)
+            if (_modeOutput != Mode.Countdown) return;
+            
+            _countdownStarted = true;
+            switch (radioButton_countdownTime.Checked)
             {
-                this.countdown_started = true;
-                if (!this.radioButton_countdownTime.Checked)
-                {
-                    this.button_pauseCountdown.Enabled = true;
-                    this.button_startCountDown.Enabled = false;
-                    this.button_pauseCountdown.BackColor = Color.FromArgb(255, 255, 128, 0);
-                    this.button_startCountDown.BackColor = Color.Silver;
-                }
-
-                if(this.radioButton_countdownTime.Checked)
-                {
-                    this.action_setCountdownTimers();
-                }
+                case false:
+                    button_pauseCountdown.Enabled = true;
+                    button_startCountDown.Enabled = false;
+                    button_pauseCountdown.BackColor = Color.FromArgb(255, 255, 128, 0);
+                    button_startCountDown.BackColor = Color.Silver;
+                    break;
+                case true:
+                    ActionSetCountdownTimers();
+                    break;
             }
-
-
         }
 
-        private void action_setCountdownTimers()
+        /// <summary>
+        /// Takes the countdown values from the input and loads them into the system to prepare
+        /// Centres the text in preview
+        /// Determines the right values depending on countdown mode
+        /// </summary>
+        private void ActionSetCountdownTimers()
         {
-            if (this.mode_output == mode.countdown)
+            if (_modeOutput != Mode.Countdown) return;
+            
+            if (radioButton_countdownDuration.Checked)
             {
-                if (this.radioButton_countdownDuration.Checked)
-                {
-                    //  countdown for a given time period
-                    this.countdown_hours = (int)this.numericUpDown_hours.Value;
-                    this.countdown_minutes = (int)this.numericUpDown_minutes.Value;
-                    this.countdown_seconds = (int)this.numericUpDown_seconds.Value;
-                }
-                else
-                {
-                    DateTime datetime_to = this.dateTimePicker_countdownTime.Value;
-                    DateTime datetime_now = DateTime.Now;
-                    TimeSpan timespan_diff = datetime_to - datetime_now;
-                    if(timespan_diff.Hours < 0 || timespan_diff.Minutes < 0 || timespan_diff.Seconds < 0)
-                    {
-                        countdown_overtime = true;
-                    }
-                    //  countdown to a given time
-                    this.countdown_hours = Math.Abs(timespan_diff.Hours);
-                    this.countdown_minutes = Math.Abs(timespan_diff.Minutes);
-                    this.countdown_seconds = Math.Abs(timespan_diff.Seconds);
-                }
-                this.action_centreTextSettingsForm();
+                //  countdown for a given time period
+                _countdownHours = (int)numericUpDown_hours.Value;
+                _countdownMinutes = (int)numericUpDown_minutes.Value;
+                _countdownSeconds = (int)numericUpDown_seconds.Value;
             }
+            else
+            {
+                DateTime datetimeTo = dateTimePicker_countdownTime.Value;
+                DateTime datetimeNow = DateTime.Now;
+                TimeSpan timespanDiff = datetimeTo - datetimeNow;
+                if (timespanDiff.Hours < 0 || timespanDiff.Minutes < 0 || timespanDiff.Seconds < 0)
+                    _countdownOvertime = true;
+                //  countdown to a given time
+                _countdownHours = Math.Abs(timespanDiff.Hours);
+                _countdownMinutes = Math.Abs(timespanDiff.Minutes);
+                _countdownSeconds = Math.Abs(timespanDiff.Seconds);
+            }
+
+            ActionCentreTextSettingsForm();
+            
         }
 
         /*-----------------------------------------------------------------------*/
         //  Other actions
         /*-----------------------------------------------------------------------*/
 
-        private void action_setCountdownMode()
+        /// <summary>
+        /// Switches between the correct countdown mode based on the input given in the settings form
+        /// </summary>
+        private void ActionSetCountdownMode()
         {
-            if (this.radioButton_countdownTime.Checked)
+            if (radioButton_countdownTime.Checked)
             {
-
-                this.action_setCountdownTimers();
-                this.action_takeCountdownTime();
-                this.action_startCountdown();
-                this.button_startCountDown.Enabled = false;
-                this.button_pauseCountdown.Enabled = false;
-                this.button_startCountDown.BackColor = Color.Silver;
-                this.button_pauseCountdown.BackColor = Color.Silver;
-                
-                
+                ActionSetCountdownTimers();
+                ActionTakeCountdownTime();
+                ActionStartCountdown();
+                button_startCountDown.Enabled = false;
+                button_pauseCountdown.Enabled = false;
+                button_startCountDown.BackColor = Color.Silver;
+                button_pauseCountdown.BackColor = Color.Silver;
             }
             else
             {
-                this.action_pauseCountdown();
-                this.action_setCountdownTimers();
-                this.action_takeCountdownTime();
+                ActionPauseCountdown();
+                ActionSetCountdownTimers();
+                ActionTakeCountdownTime();
             }
         }
 
-        private void loop_programLoop()
+        /// <summary>
+        /// The loop that triggers every second to update the output and preview displayed time
+        /// </summary>
+        private void LoopProgramLoop()
         {
-            switch(this.mode_output)
+            switch (_modeOutput)
             {
-                case mode.black:
+                case Mode.Black:
                 default:
-                case mode.idle:
-                    this.label_preview.Text = "";
-                    this.action_timeToOutput(this.seconds_clock);
-                    this.action_centreTextSettingsForm();
+                case Mode.Idle:
+                    label_preview.Text = "";
+                    ActionTimeToOutput(_secondsClock);
+                    ActionCentreTextSettingsForm();
                     break;
-                case mode.clock:
+                case Mode.Clock:
                     DateTime dateTime = DateTime.Now;
-                    this.program_hours = Int16.Parse(dateTime.ToString("HH"));
-                    this.program_minutes = Int16.Parse(dateTime.ToString("mm"));
-                    this.program_seconds = Int16.Parse(dateTime.ToString("ss"));
-                    this.action_setOutputColor(Color.White);
-                    this.action_timeToOutput(this.seconds_clock);
+                    _programHours = short.Parse(dateTime.ToString("HH"));
+                    _programMinutes = short.Parse(dateTime.ToString("mm"));
+                    _programSeconds = short.Parse(dateTime.ToString("ss"));
+                    ActionSetOutputColor(Color.White);
+                    ActionTimeToOutput(_secondsClock);
                     break;
-                case mode.countdown:
-                    
-                    if(
-                        this.checkBox_countdownFlicker.Checked && 
-                        (
-                            this.program_seconds <= numericUpDown_countdownFlicker.Value &&
-                            this.program_hours == 0 && 
-                            this.program_minutes == 0
-                        ) || (
-                            this.countdown_overtime
-                        )
+                case Mode.Countdown:
+
+                    if (
+                        (checkBox_countdownFlicker.Checked &&
+                         _programSeconds <= numericUpDown_countdownFlicker.Value &&
+                         _programHours == 0 &&
+                         _programMinutes == 0) || _countdownOvertime
                     )
                     {
-                        Color outputColor = this.program_seconds % 2 == 0 ? Color.White : Color.Red;
-                        this.action_setOutputColor(outputColor);
-                       
+                        Color outputColor = _programSeconds % 2 == 0 ? Color.White : Color.Red;
+                        ActionSetOutputColor(outputColor);
                     }
                     else
                     {
-                        this.action_setOutputColor(Color.White);
+                        ActionSetOutputColor(Color.White);
                     }
 
-                    this.action_timeToOutput(this.seconds_countdown);
+                    ActionTimeToOutput(_secondsCountdown);
 
-                    if (this.countdown_started)
+                    if (_countdownStarted)
                     {
-                        if(this.countdown_overtime && this.checkBox_overtime.Checked)
+                        if (_countdownOvertime && checkBox_overtime.Checked)
                         {
-                            this.program_seconds++;
-                            if (this.program_seconds > 59)
+                            _programSeconds++;
+                            if (_programSeconds > 59)
                             {
-                                this.program_seconds = 0;
-                                this.program_minutes++;
+                                _programSeconds = 0;
+                                _programMinutes++;
                             }
 
-                            if (this.program_minutes > 59)
+                            if (_programMinutes > 59)
                             {
-                                this.program_minutes = 0;
-                                this.program_hours++;
+                                _programMinutes = 0;
+                                _programHours++;
                             }
                         }
                         else
                         {
-                            this.program_seconds--;
-                            if (this.program_seconds < 0)
+                            _programSeconds--;
+                            if (_programSeconds < 0)
                             {
-                                this.program_seconds = 59;
-                                this.program_minutes--;
+                                _programSeconds = 59;
+                                _programMinutes--;
                             }
 
-                            if (this.program_minutes < 0)
+                            if (_programMinutes < 0)
                             {
-                                this.program_minutes = 59;
-                                this.program_hours--;
+                                _programMinutes = 59;
+                                _programHours--;
                             }
 
-                            if (this.program_hours < 0)
+                            if (_programHours < 0)
                             {
-                                this.program_hours = 0;
-                                this.program_seconds = 0;
-                                this.program_minutes = 0;
-                                this.countdown_overtime = true;
-                                if(this.checkBox_overtime.Checked)
-                                {
-                                    this.program_seconds = 1;
-                                }
+                                _programHours = 0;
+                                _programSeconds = 0;
+                                _programMinutes = 0;
+                                _countdownOvertime = true;
+                                if (checkBox_overtime.Checked) _programSeconds = 1;
                             }
                         }
-                        
                     }
+
                     break;
             }
+        }
+
+        private enum Mode
+        {
+            Clock,
+            Countdown,
+            Black,
+            Idle
         }
     }
 }

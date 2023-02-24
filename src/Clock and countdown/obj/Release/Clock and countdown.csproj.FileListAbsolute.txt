@@ -14,19 +14,3 @@ C:\Users\marth\source\repos\Clock and countdown\Clock and countdown\obj\Release\
 C:\Users\marth\source\repos\Clock and countdown\Clock and countdown\obj\Release\Clock and countdown.application
 C:\Users\marth\source\repos\Clock and countdown\Clock and countdown\obj\Release\Clock and countdown.exe
 C:\Users\marth\source\repos\Clock and countdown\Clock and countdown\obj\Release\Clock and countdown.pdb
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\bin\Release\Clock and countdown.exe.config
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\bin\Release\Clock and countdown.exe.manifest
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\bin\Release\Clock and countdown.application
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\bin\Release\Clock and countdown.exe
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\bin\Release\Clock and countdown.pdb
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\obj\Release\Clock and countdown.csproj.AssemblyReference.cache
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\obj\Release\Clock and countdown.csproj.SuggestedBindingRedirects.cache
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\obj\Release\Clock_and_countdown.Form1.resources
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\obj\Release\Clock_and_countdown.Properties.Resources.resources
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\obj\Release\Clock and countdown.csproj.GenerateResource.cache
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\obj\Release\Clock and countdown.csproj.CoreCompileInputs.cache
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\obj\Release\Clock and countdown.TrustInfo.xml
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\obj\Release\Clock and countdown.exe.manifest
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\obj\Release\Clock and countdown.application
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\obj\Release\Clock and countdown.exe
-C:\Users\marth\source\repos\Clock and countdown\src\Clock and countdown\obj\Release\Clock and countdown.pdb
