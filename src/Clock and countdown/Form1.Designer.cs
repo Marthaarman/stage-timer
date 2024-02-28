@@ -97,13 +97,14 @@
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel5, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel6, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 10);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(955, 547);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(716, 444);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -115,12 +116,13 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.label_version, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.label_author, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(480, 483);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(360, 392);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(472, 61);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(354, 50);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // label_version
@@ -128,12 +130,12 @@
             this.label_version.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label_version.AutoSize = true;
-            this.label_version.Location = new System.Drawing.Point(386, 35);
-            this.label_version.Margin = new System.Windows.Forms.Padding(0, 5, 3, 0);
+            this.label_version.Location = new System.Drawing.Point(283, 29);
+            this.label_version.Margin = new System.Windows.Forms.Padding(0, 4, 2, 0);
             this.label_version.Name = "label_version";
-            this.label_version.Size = new System.Drawing.Size(83, 26);
+            this.label_version.Size = new System.Drawing.Size(69, 21);
             this.label_version.TabIndex = 1;
-            this.label_version.Text = "Version 1.0.3";
+            this.label_version.Text = "Version 1.0.4";
             this.label_version.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label_author
@@ -141,10 +143,10 @@
             this.label_author.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label_author.AutoSize = true;
-            this.label_author.Location = new System.Drawing.Point(243, 5);
-            this.label_author.Margin = new System.Windows.Forms.Padding(0, 5, 3, 0);
+            this.label_author.Location = new System.Drawing.Point(170, 4);
+            this.label_author.Margin = new System.Windows.Forms.Padding(0, 4, 2, 0);
             this.label_author.Name = "label_author";
-            this.label_author.Size = new System.Drawing.Size(226, 25);
+            this.label_author.Size = new System.Drawing.Size(182, 21);
             this.label_author.TabIndex = 0;
             this.label_author.Text = "github.com/Marthaarman/stage-timer";
             this.label_author.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -157,9 +159,11 @@
             this.groupBox6.Controls.Add(this.button_countdownSetTime);
             this.groupBox6.Controls.Add(this.button_pauseCountdown);
             this.groupBox6.Controls.Add(this.button_startCountDown);
-            this.groupBox6.Location = new System.Drawing.Point(3, 243);
+            this.groupBox6.Location = new System.Drawing.Point(2, 197);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(471, 234);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Size = new System.Drawing.Size(354, 191);
             this.groupBox6.TabIndex = 4;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Countdown control";
@@ -169,9 +173,10 @@
             this.button_countdownSetTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button_countdownSetTime.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.button_countdownSetTime.Location = new System.Drawing.Point(0, 33);
+            this.button_countdownSetTime.Location = new System.Drawing.Point(0, 27);
+            this.button_countdownSetTime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_countdownSetTime.Name = "button_countdownSetTime";
-            this.button_countdownSetTime.Size = new System.Drawing.Size(471, 38);
+            this.button_countdownSetTime.Size = new System.Drawing.Size(354, 31);
             this.button_countdownSetTime.TabIndex = 4;
             this.button_countdownSetTime.Text = "Set Countdown Time";
             this.button_countdownSetTime.UseVisualStyleBackColor = false;
@@ -183,9 +188,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button_pauseCountdown.BackColor = System.Drawing.Color.Silver;
             this.button_pauseCountdown.Enabled = false;
-            this.button_pauseCountdown.Location = new System.Drawing.Point(0, 156);
+            this.button_pauseCountdown.Location = new System.Drawing.Point(0, 127);
+            this.button_pauseCountdown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_pauseCountdown.Name = "button_pauseCountdown";
-            this.button_pauseCountdown.Size = new System.Drawing.Size(471, 72);
+            this.button_pauseCountdown.Size = new System.Drawing.Size(354, 58);
             this.button_pauseCountdown.TabIndex = 2;
             this.button_pauseCountdown.Text = "PAUSE";
             this.button_pauseCountdown.UseVisualStyleBackColor = false;
@@ -197,9 +203,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.button_startCountDown.BackColor = System.Drawing.Color.Silver;
             this.button_startCountDown.Enabled = false;
-            this.button_startCountDown.Location = new System.Drawing.Point(0, 77);
+            this.button_startCountDown.Location = new System.Drawing.Point(0, 63);
+            this.button_startCountDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_startCountDown.Name = "button_startCountDown";
-            this.button_startCountDown.Size = new System.Drawing.Size(471, 73);
+            this.button_startCountDown.Size = new System.Drawing.Size(354, 59);
             this.button_startCountDown.TabIndex = 1;
             this.button_startCountDown.Text = "START";
             this.button_startCountDown.UseVisualStyleBackColor = false;
@@ -213,11 +220,12 @@
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.Controls.Add(this.groupBox_preview, 0, 0);
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(2, 2);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.22066F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(471, 234);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(354, 191);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // groupBox_preview
@@ -228,9 +236,11 @@
             this.groupBox_preview.BackColor = System.Drawing.Color.Black;
             this.groupBox_preview.Controls.Add(this.label_preview);
             this.groupBox_preview.ForeColor = System.Drawing.Color.White;
-            this.groupBox_preview.Location = new System.Drawing.Point(3, 3);
+            this.groupBox_preview.Location = new System.Drawing.Point(2, 2);
+            this.groupBox_preview.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox_preview.Name = "groupBox_preview";
-            this.groupBox_preview.Size = new System.Drawing.Size(465, 228);
+            this.groupBox_preview.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox_preview.Size = new System.Drawing.Size(350, 187);
             this.groupBox_preview.TabIndex = 0;
             this.groupBox_preview.TabStop = false;
             this.groupBox_preview.Text = "Preview";
@@ -242,9 +252,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label_preview.AutoSize = true;
             this.label_preview.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_preview.Location = new System.Drawing.Point(268, 196);
+            this.label_preview.Location = new System.Drawing.Point(201, 159);
+            this.label_preview.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_preview.Name = "label_preview";
-            this.label_preview.Size = new System.Drawing.Size(191, 25);
+            this.label_preview.Size = new System.Drawing.Size(153, 20);
             this.label_preview.TabIndex = 0;
             this.label_preview.Text = "preview_placeholder";
             this.label_preview.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -260,12 +271,13 @@
             this.tableLayoutPanel5.Controls.Add(this.groupBox1, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.groupBox4, 0, 1);
             this.tableLayoutPanel5.Controls.Add(this.groupBox5, 1, 0);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(480, 3);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(360, 2);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(472, 234);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(354, 191);
             this.tableLayoutPanel5.TabIndex = 4;
             // 
             // groupBox1
@@ -275,9 +287,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.button_openOutputView);
             this.groupBox1.Controls.Add(this.comboBox_outputMonitor);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(230, 111);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(173, 91);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Output View";
@@ -287,9 +301,10 @@
             this.button_openOutputView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_openOutputView.Location = new System.Drawing.Point(0, 51);
+            this.button_openOutputView.Location = new System.Drawing.Point(0, 41);
+            this.button_openOutputView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button_openOutputView.Name = "button_openOutputView";
-            this.button_openOutputView.Size = new System.Drawing.Size(223, 54);
+            this.button_openOutputView.Size = new System.Drawing.Size(168, 45);
             this.button_openOutputView.TabIndex = 1;
             this.button_openOutputView.Text = "Open Program View";
             this.button_openOutputView.UseVisualStyleBackColor = true;
@@ -300,9 +315,10 @@
             this.comboBox_outputMonitor.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox_outputMonitor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_outputMonitor.Location = new System.Drawing.Point(0, 21);
+            this.comboBox_outputMonitor.Location = new System.Drawing.Point(0, 17);
+            this.comboBox_outputMonitor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBox_outputMonitor.Name = "comboBox_outputMonitor";
-            this.comboBox_outputMonitor.Size = new System.Drawing.Size(224, 24);
+            this.comboBox_outputMonitor.Size = new System.Drawing.Size(170, 21);
             this.comboBox_outputMonitor.TabIndex = 0;
             // 
             // groupBox4
@@ -313,9 +329,11 @@
             this.groupBox4.Controls.Add(this.radioButton_mode_idle_black);
             this.groupBox4.Controls.Add(this.radioButton_mode_countdown);
             this.groupBox4.Controls.Add(this.radioButton_mode_clock);
-            this.groupBox4.Location = new System.Drawing.Point(3, 120);
+            this.groupBox4.Location = new System.Drawing.Point(2, 97);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(230, 111);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Size = new System.Drawing.Size(173, 92);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Output Mode";
@@ -323,9 +341,10 @@
             // radioButton_mode_idle_black
             // 
             this.radioButton_mode_idle_black.AutoSize = true;
-            this.radioButton_mode_idle_black.Location = new System.Drawing.Point(6, 32);
+            this.radioButton_mode_idle_black.Location = new System.Drawing.Point(4, 26);
+            this.radioButton_mode_idle_black.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioButton_mode_idle_black.Name = "radioButton_mode_idle_black";
-            this.radioButton_mode_idle_black.Size = new System.Drawing.Size(94, 20);
+            this.radioButton_mode_idle_black.Size = new System.Drawing.Size(80, 17);
             this.radioButton_mode_idle_black.TabIndex = 2;
             this.radioButton_mode_idle_black.Text = "Idle / Black";
             this.radioButton_mode_idle_black.UseVisualStyleBackColor = true;
@@ -333,9 +352,10 @@
             // radioButton_mode_countdown
             // 
             this.radioButton_mode_countdown.AutoSize = true;
-            this.radioButton_mode_countdown.Location = new System.Drawing.Point(6, 84);
+            this.radioButton_mode_countdown.Location = new System.Drawing.Point(4, 68);
+            this.radioButton_mode_countdown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioButton_mode_countdown.Name = "radioButton_mode_countdown";
-            this.radioButton_mode_countdown.Size = new System.Drawing.Size(94, 20);
+            this.radioButton_mode_countdown.Size = new System.Drawing.Size(79, 17);
             this.radioButton_mode_countdown.TabIndex = 1;
             this.radioButton_mode_countdown.Text = "Countdown";
             this.radioButton_mode_countdown.UseVisualStyleBackColor = true;
@@ -344,9 +364,10 @@
             // 
             this.radioButton_mode_clock.AutoSize = true;
             this.radioButton_mode_clock.Checked = true;
-            this.radioButton_mode_clock.Location = new System.Drawing.Point(6, 58);
+            this.radioButton_mode_clock.Location = new System.Drawing.Point(4, 47);
+            this.radioButton_mode_clock.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioButton_mode_clock.Name = "radioButton_mode_clock";
-            this.radioButton_mode_clock.Size = new System.Drawing.Size(62, 20);
+            this.radioButton_mode_clock.Size = new System.Drawing.Size(52, 17);
             this.radioButton_mode_clock.TabIndex = 0;
             this.radioButton_mode_clock.TabStop = true;
             this.radioButton_mode_clock.Text = "Clock";
@@ -359,9 +380,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.label2);
             this.groupBox5.Controls.Add(this.numericUpDown_fontSize);
-            this.groupBox5.Location = new System.Drawing.Point(239, 3);
+            this.groupBox5.Location = new System.Drawing.Point(179, 2);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(230, 111);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Size = new System.Drawing.Size(173, 91);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Style settings";
@@ -369,21 +392,28 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 26);
+            this.label2.Location = new System.Drawing.Point(4, 21);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 16);
+            this.label2.Size = new System.Drawing.Size(51, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "Font Size";
             // 
             // numericUpDown_fontSize
             // 
             this.numericUpDown_fontSize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDown_fontSize.Location = new System.Drawing.Point(86, 22);
+            this.numericUpDown_fontSize.Location = new System.Drawing.Point(64, 19);
+            this.numericUpDown_fontSize.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown_fontSize.Maximum = new decimal(new int[] {
+            400,
+            0,
+            0,
+            0});
             this.numericUpDown_fontSize.Name = "numericUpDown_fontSize";
-            this.numericUpDown_fontSize.Size = new System.Drawing.Size(123, 22);
+            this.numericUpDown_fontSize.Size = new System.Drawing.Size(93, 20);
             this.numericUpDown_fontSize.TabIndex = 5;
             this.numericUpDown_fontSize.Value = new decimal(new int[] {
-            35,
+            20,
             0,
             0,
             0});
@@ -398,11 +428,12 @@
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.Controls.Add(this.groupBox3, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.groupBox2, 1, 0);
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(480, 243);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(360, 197);
+            this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 1;
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(472, 234);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(354, 191);
             this.tableLayoutPanel6.TabIndex = 5;
             // 
             // groupBox3
@@ -421,39 +452,45 @@
             this.groupBox3.Controls.Add(this.checkBox_countdown_seconds);
             this.groupBox3.Controls.Add(this.radioButton_countdownTime);
             this.groupBox3.Controls.Add(this.radioButton_countdownDuration);
-            this.groupBox3.Location = new System.Drawing.Point(3, 3);
+            this.groupBox3.Location = new System.Drawing.Point(2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(230, 228);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Size = new System.Drawing.Size(173, 187);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Countdown Settings";
             // 
             // dateTimePicker_countdownTime
             // 
-            this.dateTimePicker_countdownTime.Location = new System.Drawing.Point(56, 98);
+            this.dateTimePicker_countdownTime.Location = new System.Drawing.Point(42, 80);
+            this.dateTimePicker_countdownTime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dateTimePicker_countdownTime.Name = "dateTimePicker_countdownTime";
-            this.dateTimePicker_countdownTime.Size = new System.Drawing.Size(147, 22);
+            this.dateTimePicker_countdownTime.Size = new System.Drawing.Size(111, 20);
             this.dateTimePicker_countdownTime.TabIndex = 11;
             // 
             // numericUpDown_seconds
             // 
-            this.numericUpDown_seconds.Location = new System.Drawing.Point(158, 46);
+            this.numericUpDown_seconds.Location = new System.Drawing.Point(118, 37);
+            this.numericUpDown_seconds.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.numericUpDown_seconds.Name = "numericUpDown_seconds";
-            this.numericUpDown_seconds.Size = new System.Drawing.Size(45, 22);
+            this.numericUpDown_seconds.Size = new System.Drawing.Size(34, 20);
             this.numericUpDown_seconds.TabIndex = 10;
             // 
             // numericUpDown_minutes
             // 
-            this.numericUpDown_minutes.Location = new System.Drawing.Point(107, 46);
+            this.numericUpDown_minutes.Location = new System.Drawing.Point(80, 37);
+            this.numericUpDown_minutes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.numericUpDown_minutes.Name = "numericUpDown_minutes";
-            this.numericUpDown_minutes.Size = new System.Drawing.Size(45, 22);
+            this.numericUpDown_minutes.Size = new System.Drawing.Size(34, 20);
             this.numericUpDown_minutes.TabIndex = 9;
             // 
             // numericUpDown_hours
             // 
-            this.numericUpDown_hours.Location = new System.Drawing.Point(56, 46);
+            this.numericUpDown_hours.Location = new System.Drawing.Point(42, 37);
+            this.numericUpDown_hours.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.numericUpDown_hours.Name = "numericUpDown_hours";
-            this.numericUpDown_hours.Size = new System.Drawing.Size(45, 22);
+            this.numericUpDown_hours.Size = new System.Drawing.Size(34, 20);
             this.numericUpDown_hours.TabIndex = 8;
             // 
             // checkBox_overtime
@@ -461,18 +498,20 @@
             this.checkBox_overtime.AutoSize = true;
             this.checkBox_overtime.Checked = true;
             this.checkBox_overtime.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_overtime.Location = new System.Drawing.Point(6, 202);
+            this.checkBox_overtime.Location = new System.Drawing.Point(4, 164);
+            this.checkBox_overtime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox_overtime.Name = "checkBox_overtime";
-            this.checkBox_overtime.Size = new System.Drawing.Size(114, 20);
+            this.checkBox_overtime.Size = new System.Drawing.Size(95, 17);
             this.checkBox_overtime.TabIndex = 7;
             this.checkBox_overtime.Text = "Keep counting";
             this.checkBox_overtime.UseVisualStyleBackColor = true;
             // 
             // numericUpDown_countdownFlicker
             // 
-            this.numericUpDown_countdownFlicker.Location = new System.Drawing.Point(107, 167);
+            this.numericUpDown_countdownFlicker.Location = new System.Drawing.Point(80, 136);
+            this.numericUpDown_countdownFlicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.numericUpDown_countdownFlicker.Name = "numericUpDown_countdownFlicker";
-            this.numericUpDown_countdownFlicker.Size = new System.Drawing.Size(49, 22);
+            this.numericUpDown_countdownFlicker.Size = new System.Drawing.Size(37, 20);
             this.numericUpDown_countdownFlicker.TabIndex = 6;
             this.numericUpDown_countdownFlicker.Value = new decimal(new int[] {
             30,
@@ -483,9 +522,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(155, 169);
+            this.label1.Location = new System.Drawing.Point(116, 137);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 16);
+            this.label1.Size = new System.Drawing.Size(45, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "s to end";
             // 
@@ -494,9 +534,10 @@
             this.checkBox_countdownFlicker.AutoSize = true;
             this.checkBox_countdownFlicker.Checked = true;
             this.checkBox_countdownFlicker.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_countdownFlicker.Location = new System.Drawing.Point(6, 169);
+            this.checkBox_countdownFlicker.Location = new System.Drawing.Point(4, 137);
+            this.checkBox_countdownFlicker.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox_countdownFlicker.Name = "checkBox_countdownFlicker";
-            this.checkBox_countdownFlicker.Size = new System.Drawing.Size(92, 20);
+            this.checkBox_countdownFlicker.Size = new System.Drawing.Size(75, 17);
             this.checkBox_countdownFlicker.TabIndex = 3;
             this.checkBox_countdownFlicker.Text = "Flicker red";
             this.checkBox_countdownFlicker.UseVisualStyleBackColor = true;
@@ -506,9 +547,10 @@
             this.checkBox_countdown_seconds.AutoSize = true;
             this.checkBox_countdown_seconds.Checked = true;
             this.checkBox_countdown_seconds.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox_countdown_seconds.Location = new System.Drawing.Point(6, 133);
+            this.checkBox_countdown_seconds.Location = new System.Drawing.Point(4, 108);
+            this.checkBox_countdown_seconds.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox_countdown_seconds.Name = "checkBox_countdown_seconds";
-            this.checkBox_countdown_seconds.Size = new System.Drawing.Size(117, 20);
+            this.checkBox_countdown_seconds.Size = new System.Drawing.Size(96, 17);
             this.checkBox_countdown_seconds.TabIndex = 2;
             this.checkBox_countdown_seconds.Text = "Show seconds";
             this.checkBox_countdown_seconds.UseVisualStyleBackColor = true;
@@ -516,9 +558,10 @@
             // radioButton_countdownTime
             // 
             this.radioButton_countdownTime.AutoSize = true;
-            this.radioButton_countdownTime.Location = new System.Drawing.Point(6, 71);
+            this.radioButton_countdownTime.Location = new System.Drawing.Point(4, 58);
+            this.radioButton_countdownTime.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioButton_countdownTime.Name = "radioButton_countdownTime";
-            this.radioButton_countdownTime.Size = new System.Drawing.Size(73, 20);
+            this.radioButton_countdownTime.Size = new System.Drawing.Size(60, 17);
             this.radioButton_countdownTime.TabIndex = 1;
             this.radioButton_countdownTime.Text = "To time";
             this.radioButton_countdownTime.UseVisualStyleBackColor = true;
@@ -527,9 +570,10 @@
             // 
             this.radioButton_countdownDuration.AutoSize = true;
             this.radioButton_countdownDuration.Checked = true;
-            this.radioButton_countdownDuration.Location = new System.Drawing.Point(6, 22);
+            this.radioButton_countdownDuration.Location = new System.Drawing.Point(4, 18);
+            this.radioButton_countdownDuration.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.radioButton_countdownDuration.Name = "radioButton_countdownDuration";
-            this.radioButton_countdownDuration.Size = new System.Drawing.Size(155, 20);
+            this.radioButton_countdownDuration.Size = new System.Drawing.Size(128, 17);
             this.radioButton_countdownDuration.TabIndex = 0;
             this.radioButton_countdownDuration.TabStop = true;
             this.radioButton_countdownDuration.Text = "Duration (HH:MM:SS)";
@@ -541,9 +585,11 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.checkBox_clock_seconds);
-            this.groupBox2.Location = new System.Drawing.Point(239, 3);
+            this.groupBox2.Location = new System.Drawing.Point(179, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(230, 228);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(173, 187);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Clock Settings";
@@ -551,19 +597,21 @@
             // checkBox_clock_seconds
             // 
             this.checkBox_clock_seconds.AutoSize = true;
-            this.checkBox_clock_seconds.Location = new System.Drawing.Point(6, 34);
+            this.checkBox_clock_seconds.Location = new System.Drawing.Point(4, 28);
+            this.checkBox_clock_seconds.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.checkBox_clock_seconds.Name = "checkBox_clock_seconds";
-            this.checkBox_clock_seconds.Size = new System.Drawing.Size(119, 20);
+            this.checkBox_clock_seconds.Size = new System.Drawing.Size(98, 17);
             this.checkBox_clock_seconds.TabIndex = 2;
             this.checkBox_clock_seconds.Text = "Show Seconds";
             this.checkBox_clock_seconds.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(979, 571);
+            this.ClientSize = new System.Drawing.Size(734, 464);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
             this.Text = "Stage timer";
             this.tableLayoutPanel1.ResumeLayout(false);

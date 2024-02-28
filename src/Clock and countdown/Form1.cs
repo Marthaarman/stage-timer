@@ -338,7 +338,7 @@ namespace Clock_and_countdown
         /// </summary>
         private void ActionTakeFontSize()
         {
-            _fontSize = (int)numericUpDown_fontSize.Value;
+            _fontSize = (int)numericUpDown_fontSize.Value * 3;
             FontFamily fam = label_preview.Font.FontFamily;
             label_preview.Font = new Font(fam, _fontSize);
             _fontSize = (int)Math.Ceiling(_factorPreviewProgram * 1.2 * _fontSize);
