@@ -33,4 +33,4 @@ Code is written on windows using Microsoft Visual Studio in c#.
 Code can be customized but required fork and open source publishing of the code. 
 
 # Feature request
-Send me a message on github or email to mart@mhwd.nl
+Send me a message on github
